@@ -22,10 +22,10 @@ func main() {
 	insert(Employee{101, "pushpa1", "A+"})
 	insert(Employee{102, "pushpa2", "B+"})
 
-	// updating the customer by id
+	// updating the emp by id
 	updateById(Employee{101, "quest global", "A+"})
 
-	// select all customers
+	// select all emp
 	results := selectAll()
 
 	// iterating a results
@@ -35,13 +35,13 @@ func main() {
 		fmt.Println(e2.Id, e2.Name, e2.Bg)
 	}
 
-	// select customer by id
+	// select emp by id
 	result := selectById(101)
 	var e2 Employee
 	result.Scan(&e2.Id, &e2.Name, &e2.Bg)
 	fmt.Println(e2.Id, e2.Name, e2.Bg)
 
-	// delete a customer by id
+	// delete a emp by id
 	delete(101)
 }
 
@@ -54,7 +54,7 @@ func connect() *sql.DB {
 	return db
 }
 
-// function to insert a row in customer table
+// function to insert a row in emp table
 func insert(e2 Employee) {
 	db := connect()
 	insert, err := db.Query("INSERT INTO emp(id, name, bg) VALUES (?, ?, ?)", e2.Id, e2.Name, e2.Bg)
@@ -65,7 +65,7 @@ func insert(e2 Employee) {
 	defer db.Close()
 }
 
-// function to select all records from customer table
+// function to select all records from emp table
 func selectAll() *sql.Rows {
 	db := connect()
 	results, err := db.Query("SELECT * FROM emp")
@@ -76,7 +76,7 @@ func selectAll() *sql.Rows {
 	return results
 }
 
-// function to select a customer record from table by customer id
+// function to select a customer record from table by emp id
 func selectById(id int) *sql.Row {
 	db := connect()
 	result := db.QueryRow("SELECT * FROM emp WHERE id=?", id)
@@ -84,13 +84,13 @@ func selectById(id int) *sql.Row {
 	return result
 }
 
-// function to update a customer record by customer id
+// function to update a emp record by emp id
 func updateById(e2 Employee) {
 	db := connect()
 	db.QueryRow("UPDATE emp SET name=? WHERE id=?", e2.Name, e2.Id)
 }
 
-// function to delete a customer by customer id
+// function to delete a emp by emp id
 func delete(id int) {
 	db := connect()
 	db.QueryRow("DELETE FROM emp WHERE id=?", id)
