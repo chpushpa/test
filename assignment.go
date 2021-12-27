@@ -76,7 +76,7 @@ func selectAll() *sql.Rows {
 	return results
 }
 
-// function to select a customer record from table by emp id
+// function to select a emplyoee record from table by emp id
 func selectById(id int) *sql.Row {
 	db := connect()
 	result := db.QueryRow("SELECT * FROM emp WHERE id=?", id)
